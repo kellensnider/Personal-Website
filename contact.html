@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Kellen R. Snider</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 1em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #00bcd4;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .hero h1 {
+      font-size: 2.8em;
+      margin-bottom: 0.2em;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .contact-info a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Contact Me</h1>
+    <p>Let's connect!</p>
+  </header>
+
+  <!-- Contact Info Section -->
+  <div class="container">
+    <div class="contact-info">
+      <p><strong>Email:</strong> <a href="mailto:ksnider@uoregon.edu">ksnider@uoregon.edu</a></p>
+      <p><strong>Phone:</strong> (503) 812-7460</p>
+      <p><strong>Location:</strong> Tigard, OR / Eugene, OR</p>
+      <p>
+        <strong>Links:</strong><br>
+        <a href="https://www.linkedin.com/in/kellen-snider-683396256/" target="_blank">LinkedIn</a><br>
+        <a href="https://github.com/kellensnider" target="_blank">GitHub</a>
+      </p>
+    </div>
+
+    <!-- Optional: Contact Form (non-functional unless hooked to backend/email service) -->
+    <!-- 
+    <form action="mailto:ksnider@uoregon.edu" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    -->
+  </div>
+
+</body>
+</html>
+
