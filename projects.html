@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+  <link rel="stylesheet" href="styles.css" /> <!-- Optional: external CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 1em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #00bcd4;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .hero h1 {
+      font-size: 2.8em;
+      margin-bottom: 0.2em;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .project-card {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+    }
+
+    .project-card a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Projects</h1>
+    <p>Things I've built and worked on</p>
+  </header>
+
+  <!-- Projects Grid -->
+  <section class="projects">
+    <div class="project-card">
+      <h3>Air Traffic Control Game</h3>
+      <p>A simulation game where players manage real-time aircraft routing.</p>
+      <a href="https://github.com/kellensnider/Simple-ATC-Game" target="_blank">View on GitHub</a>
+    </div>
+
+    <div class="project-card">
+      <h3>AI in Aviation Research</h3>
+      <p>Undergraduate thesis exploring machine learning applications in air traffic systems.</p>
+      <a href="#">Coming Soon</a>
+    </div>
+
+  </section>
+
+</body>
+</html>
+
