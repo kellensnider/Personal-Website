@@ -1,804 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kellen Snider — CS Student &amp; AI Researcher</title>
-  <meta name="description" content="Kellen Snider — Computer Science student at University of Oregon, AI in aviation researcher, and private pilot building at the intersection of intelligent systems and flight." />
-  <meta name="theme-color" content="#06060e" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kellen Snider: Software Engineer</title>
+  <meta name="description" content="Kellen Snider is a software engineer and private pilot building on-device computer vision that detects aircraft from the cockpit. CS at the University of Oregon, graduating June 2027.">
+  <link rel="canonical" href="https://kellensnider.github.io/Personal-Website/">
+  <meta name="author" content="Kellen Snider">
 
-  <!-- Open Graph -->
-  <meta property="og:title"       content="Kellen Snider — CS Student &amp; AI Researcher" />
-  <meta property="og:description" content="Portfolio of Kellen Snider: CS student, AI in aviation researcher, private pilot." />
-  <meta property="og:type"        content="website" />
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kellen Snider">
+  <meta property="og:title" content="Kellen Snider: Software Engineer">
+  <meta property="og:description" content="Software engineer and private pilot. I build computer vision that detects aircraft from the cockpit.">
+  <meta property="og:url" content="https://kellensnider.github.io/Personal-Website/">
+  <meta property="og:image" content="https://kellensnider.github.io/Personal-Website/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Atlas AI flight-test frame: a green tracking box on a distant aircraft over Oregon terrain.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kellen Snider: Software Engineer">
+  <meta name="twitter:description" content="Software engineer and private pilot. I build computer vision that detects aircraft from the cockpit.">
+  <meta name="twitter:image" content="https://kellensnider.github.io/Personal-Website/assets/og-image.jpg">
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="assets/fonts/plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Apply a saved theme before first paint. Without JS the site follows the OS setting. -->
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kellen Snider",
+    "jobTitle": "Software Engineer",
+    "url": "https://kellensnider.github.io/Personal-Website/",
+    "email": "mailto:ksnider@uoregon.edu",
+    "alumniOf": "University of Oregon",
+    "sameAs": [
+      "https://github.com/kellensnider",
+      "https://www.linkedin.com/in/kellen-snider-683396256/"
+    ]
+  }
+  </script>
 </head>
-<body class="loading">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- =============================================
-       PAGE LOADER
-       ============================================= -->
-  <div id="page-loader" class="page-loader" role="status" aria-label="Loading">
-    <div class="loader-inner">
-      <span class="loader-logo">KS</span>
-      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <header class="site-bar">
+    <div class="wrap">
+      <a class="site-name" href="#top">Kellen Snider</a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="Kellen_Snider_Resume.pdf">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle mono" type="button" data-theme-toggle hidden>Dark</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- =============================================
-       NAVIGATION
-       ============================================= -->
-  <nav id="main-nav" class="nav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="Kellen Snider – home">KS</a>
-
-      <button
-        id="nav-toggle"
-        class="nav-toggle"
-        aria-label="Toggle navigation menu"
-        aria-controls="nav-links"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <ul id="nav-links" class="nav-links" role="list">
-        <li><a href="#about"      class="nav-link">About</a></li>
-        <li><a href="#projects"   class="nav-link">Projects</a></li>
-        <li><a href="#skills"     class="nav-link">Skills</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#contact"    class="nav-cta">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-
-    <!-- =============================================
-         HERO
-         ============================================= -->
-    <section id="hero" class="hero" aria-label="Introduction">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-gradient-layer" aria-hidden="true"></div>
-      <div class="hero-grid-layer"     aria-hidden="true"></div>
-
-      <div class="hero-content">
-        <div class="hero-badge" aria-label="Affiliation">
-          <span class="badge-pulse" aria-hidden="true"></span>
-          University of Oregon &middot; Clark Honors College
-        </div>
-
-        <h1 class="hero-title">
-          <span class="hero-title-line1">Kellen Snider</span>
-          <span class="hero-title-line2">Software Engineer &amp; Private&nbsp;Pilot</span>
-        </h1>
-
-        <p class="hero-subtitle">
-          Co-founder of ATLAS AI. Software engineer at Oregon Blockchain Group.
-          Freelance web developer. Private pilot. CS student at UO Clark Honors College.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fa-solid fa-rocket" aria-hidden="true"></i>
-            View My Work
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
-            Get In Touch
-          </a>
-          <a href="Kellen Snider Resume - Spring 2026.pdf" download class="btn btn-secondary">
-            <i class="fa-regular fa-file-pdf" aria-hidden="true"></i>
-            Resume
-          </a>
-        </div>
-
-        <div class="hero-stats" aria-label="Quick stats">
-          <div class="hero-stat">
-            <div class="hero-stat-number">3.97</div>
-            <div class="hero-stat-label">GPA &middot; Clark Honors</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-number">74.8</div>
-            <div class="hero-stat-label">Flight Hours</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-number">$5K</div>
-            <div class="hero-stat-label">Innovation Fellow Award</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-number">3rd</div>
-            <div class="hero-stat-label">of 45 Teams &middot; Hackathon</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scroll-hint" aria-hidden="true">
-        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-        <span>Scroll</span>
+  <main id="main">
+    <!-- ================= Intro ================= -->
+    <section class="intro" id="top" aria-labelledby="name">
+      <div class="wrap">
+        <h1 id="name">Kellen Snider</h1>
+        <p class="lede">Software engineer and private pilot. I build computer vision that detects aircraft from the cockpit.</p>
+        <p class="status">CS @ University of Oregon (Clark Honors College), graduating June 2027. Open to new-grad software roles in aerospace and defense.</p>
+        <ul class="link-row mono" aria-label="Links">
+          <li><a href="Kellen_Snider_Resume.pdf">Resume (PDF)</a></li>
+          <li><a href="https://github.com/kellensnider" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/kellen-snider-683396256/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:ksnider@uoregon.edu">Email</a></li>
+        </ul>
       </div>
     </section>
 
-    <!-- =============================================
-         ABOUT
-         ============================================= -->
-    <section id="about" class="section" aria-label="About me">
-      <div class="container">
-        <div class="about-layout">
+    <!-- ================= Featured: Atlas AI ================= -->
+    <section class="section" id="work" aria-labelledby="work-label">
+      <div class="wrap">
+        <h2 class="section-label" id="work-label"><span class="idx" aria-hidden="true">01</span>Featured</h2>
 
-          <!-- Sidebar / Avatar -->
-          <div class="about-sidebar reveal">
-            <div class="about-avatar" aria-label="Kellen Snider">
-              <img src="IMG_7885.jpeg" alt="Kellen Snider" class="avatar-photo" />
-            </div>
-            <div class="about-badges" aria-label="Tags">
-              <span class="chip chip-purple">Co-Founder</span>
-              <span class="chip chip-cyan">Software Engineer</span>
-              <span class="chip chip-amber">Private Pilot</span>
-              <span class="chip chip-emerald">3.97 GPA</span>
-              <span class="chip chip-purple">Clark Honors</span>
-              <span class="chip chip-cyan">Innovation Fellow</span>
-            </div>
+        <article aria-labelledby="atlas-title">
+          <header class="feature-head">
+            <h3 id="atlas-title">Atlas AI</h3>
+            <p class="meta">Co-Founder, Lead Engineer &amp; Test Pilot · Jan 2025 – present · Clark Honors College thesis</p>
+          </header>
+
+          <p class="feature-summary">An on-device computer vision system that detects aircraft that don't broadcast ADS-B, using an iPhone camera in the cockpit. I lead engineering, built the data-collection pipeline, and flew the test flights as pilot in command.</p>
+
+          <figure class="figure breakout">
+            <picture>
+              <source type="image/webp" srcset="assets/atlas-track-1000.webp 1000w, assets/atlas-track.webp 1600w" sizes="(min-width: 1032px) 1000px, calc(100vw - 32px)">
+              <img src="assets/atlas-track.jpg"
+                   srcset="assets/atlas-track-1000.jpg 1000w, assets/atlas-track.jpg 1600w"
+                   sizes="(min-width: 1032px) 1000px, calc(100vw - 32px)"
+                   width="1600" height="898" decoding="async" fetchpriority="high"
+                   alt="View from the cockpit beneath a high wing, looking out over forested Oregon hills and clouds. A green box labeled TRACK marks a distant aircraft against the terrain; an inset in the top right corner shows the aircraft enlarged. Smaller orange boxes across the frame mark candidates the detector rejected.">
+            </picture>
+            <figcaption><span class="fig-no">Fig. 1</span>Flight 2 over Oregon, on footage the detector had never seen. The green box is the tracked aircraft, enlarged in the inset at top right; orange boxes are candidates the detector rejected.</figcaption>
+          </figure>
+
+          <div class="report">
+            <section class="report-row" aria-labelledby="atlas-problem">
+              <h4 id="atlas-problem">Problem</h4>
+              <p>Aircraft that don't broadcast ADS-B can be missing from a cockpit traffic display, so pilots have to spot them by eye.</p>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-built">
+              <h4 id="atlas-built">What I built</h4>
+              <ul>
+                <li>An on-device detector for the iPhone camera, targeting detection at 1–2 miles. It is trained on Amazon's Airborne Object Tracking dataset plus our own flight footage.</li>
+                <li>A cockpit data-collection pipeline that records video and telemetry next to a team-built Stratux ADS-B receiver, then uses the ADS-B data to label the footage for training.</li>
+              </ul>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-tested">
+              <h4 id="atlas-tested">How I tested it</h4>
+              <p>I flew 2 instrumented flight tests as pilot in command, then ran the detector on footage it had never seen.</p>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-results">
+              <h4 id="atlas-results">Results</h4>
+              <div>
+                <table class="data">
+                  <caption class="visually-hidden">Atlas AI flight-test results</caption>
+                  <thead>
+                    <tr><th scope="col">Flight</th><th scope="col">Result</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Flight 1</th>
+                      <td><span class="num">82 min</span> of video (<span class="num">148K</span> frames) and <span class="num">6,737</span> ADS-B reports logged.</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Flight 2</th>
+                      <td>On unseen footage, the detector (trained only on public data) locked onto an aircraft as the crew spotted it and tracked it through the full <span class="num">17 s</span> encounter, filtering about <span class="num">300</span> candidates per frame.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-recognition">
+              <h4 id="atlas-recognition">Recognition</h4>
+              <ul>
+                <li>Selected for the Oregon UAS Accelerator, Cohort 4, Fall 2026.</li>
+                <li>Oregon Innovation Challenge Fellow, $5,000 award.</li>
+              </ul>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-team">
+              <h4 id="atlas-team">Team</h4>
+              <p>I lead engineering on a two-founder team. We gathered requirements from 12+ pilots and instructors and 2 partner flight schools.</p>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-stack">
+              <h4 id="atlas-stack">Stack</h4>
+              <p class="stack">Python · PyTorch · OpenCV · YOLOv8 · Core ML · Swift · ADS-B (Stratux)</p>
+            </section>
+
+            <section class="report-row" aria-labelledby="atlas-links">
+              <h4 id="atlas-links">Links</h4>
+              <ul class="link-row mono">
+                <li><a href="https://fly-atlas.com" target="_blank" rel="noopener">fly-atlas.com</a></li>
+                <li><a href="https://docs.google.com/document/d/1oKL0tudjO8QIQTPwwU-XqL9Qgk79S9ug/edit?usp=sharing" target="_blank" rel="noopener">Thesis</a></li>
+              </ul>
+            </section>
           </div>
-
-          <!-- Text content -->
-          <div class="about-text">
-            <div class="reveal">
-              <p class="section-eyebrow">About</p>
-              <h2 class="section-title">AI research built from the pilot's seat.</h2>
-            </div>
-
-            <div class="reveal reveal-delay-1">
-              <p>
-                I'm a Computer Science student at the University of Oregon's Clark Honors College
-                (GPA 3.97), pursuing minors in Mathematics, Political Science, and Entrepreneurship.
-                I co-founded ATLAS AI as my honors thesis — a computer vision and machine learning
-                startup building real-time traffic detection and situational awareness tools for
-                single-pilot general aviation. That work earned a $5,000 Oregon Innovation Challenge
-                Fellowship.
-              </p>
-              <p>
-                Alongside ATLAS AI, I engineer blockchain solutions at Oregon Blockchain Group,
-                where I led development of TrustLedger — a trustless escrow and decentralized
-                arbitration protocol on Arbitrum. I also do freelance web development as the
-                technical lead of Sower Creative, building production sites for local businesses
-                end-to-end.
-              </p>
-              <p>
-                I'm a licensed private pilot with 74.8 hours of flight time. That firsthand
-                cockpit experience drives everything I build in aviation — I'm not solving a
-                hypothetical problem.
-              </p>
-            </div>
-
-            <div class="about-highlights reveal reveal-delay-2" aria-label="Key facts">
-              <div class="highlight-card">
-                <span class="highlight-icon" aria-hidden="true">🚀</span>
-                <div class="highlight-label">Startup</div>
-                <div class="highlight-value">ATLAS AI &middot; Co-Founder &amp; Lead Engineer</div>
-              </div>
-              <div class="highlight-card">
-                <span class="highlight-icon" aria-hidden="true">🏛️</span>
-                <div class="highlight-label">College</div>
-                <div class="highlight-value">Clark Honors College, UO &middot; GPA 3.97</div>
-              </div>
-              <div class="highlight-card">
-                <span class="highlight-icon" aria-hidden="true">🏆</span>
-                <div class="highlight-label">Award</div>
-                <div class="highlight-value">Oregon Innovation Challenge Fellow &middot; $5,000</div>
-              </div>
-              <div class="highlight-card">
-                <span class="highlight-icon" aria-hidden="true">✈️</span>
-                <div class="highlight-label">Certification</div>
-                <div class="highlight-value">Private Pilot (First Class Medical)</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        </article>
       </div>
     </section>
 
-    <div class="section-divider" aria-hidden="true"></div>
+    <!-- ================= Selected projects ================= -->
+    <section class="section" id="projects" aria-labelledby="projects-label">
+      <div class="wrap">
+        <h2 class="section-label" id="projects-label"><span class="idx" aria-hidden="true">02</span>Selected projects</h2>
 
-    <!-- =============================================
-         PROJECTS
-         ============================================= -->
-    <section id="projects" class="section projects-section" aria-label="Projects">
-      <div class="container">
+        <ol class="projects">
+          <li class="project">
+            <article aria-labelledby="p-rascal">
+              <h3 id="p-rascal">NASA RASC-AL 2027: Autonomous Lunar Prospecting Rover</h3>
+              <p class="result">Project Lead · 9-person team · Fall 2026 – present</p>
+              <p class="desc">An autonomous, battery-powered rover concept for lunar resource discovery (Theme 3: Lunar Resource Exploration), built through Oregon Blockchain Group. I lead mission planning and direct research across 6 subsystem areas (3 major technical papers, 10+ pages of team notes), and designed a modular line-replaceable-unit architecture so subsystems can be repaired by EVA or robots. The NASA proposal is due February 2027, ahead of Phase II selection.</p>
+            </article>
+          </li>
 
-        <div class="projects-header">
-          <div class="reveal">
-            <p class="section-eyebrow">Projects</p>
-            <h2 class="section-title">What I've been building.</h2>
-          </div>
-          <a
-            href="https://github.com/kellensnider"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-secondary reveal"
-            aria-label="View all projects on GitHub"
-          >
-            <i class="fa-brands fa-github" aria-hidden="true"></i>
-            GitHub Profile
-          </a>
-        </div>
-
-        <div class="projects-grid">
-
-          <!-- Project 1 -->
-          <article class="project-card reveal">
-            <div class="project-top">
-              <div class="project-icon" aria-hidden="true">📈</div>
-              <div class="project-actions">
-                <a
-                  href="https://github.com/kellensnider/Quackhacks2025_Market_Confidence"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="icon-btn"
-                  aria-label="View Market Confidence Analyzer on GitHub"
-                >
-                  <i class="fa-brands fa-github" aria-hidden="true"></i>
-                </a>
+          <li class="project">
+            <article aria-labelledby="p-curate">
+              <h3 id="p-curate">Curate: AI Subscription Manager</h3>
+              <p class="result">1st Place, .tech Track, QuackHacks 3 (~100 teams)</p>
+              <p class="desc">A full-stack web app, built in 24 hours on a 3-person team, that recommends which streaming services to keep each month across 8 providers and a 2,000-title catalog. I developed a Claude tool-use agent (via MCP) that carries out subscription changes, plus a Gemini computer-use agent that automates service sign-ups in a remote browser.</p>
+              <div class="foot">
+                <p class="stack">Next.js · TypeScript · Express · MongoDB · JWT auth</p>
+                <ul class="links">
+                  <li><a href="https://curate-rosy.vercel.app" target="_blank" rel="noopener">Live</a></li>
+                  <li><a href="https://github.com/kellensnider/Curate" target="_blank" rel="noopener">Repo</a></li>
+                </ul>
               </div>
-            </div>
-            <div class="project-award" aria-label="Award">🏆 3rd Place &mdash; QuackHacks 2025</div>
-            <h3 class="project-title">Market Confidence Analyzer</h3>
-            <p class="project-desc">
-              Real-time market confidence scoring system (0&ndash;100) that merges stock, crypto,
-              housing, bonds, and Polymarket data via a FastAPI backend and streamlined HTML/JS
-              interface. Built as a 2-person team in 24 hours, placing 3rd out of 45 teams.
-            </p>
-            <div class="project-tags" aria-label="Technologies">
-              <span class="tag">Python</span>
-              <span class="tag">FastAPI</span>
-              <span class="tag">REST APIs</span>
-              <span class="tag">HTML/JS</span>
-              <span class="tag">Polymarket</span>
-              <span class="tag">Data Aggregation</span>
-            </div>
-          </article>
+            </article>
+          </li>
 
-          <!-- Project 2 -->
-          <article class="project-card reveal reveal-delay-1">
-            <div class="project-top">
-              <div class="project-icon" aria-hidden="true">🛩️</div>
-              <div class="project-actions">
-                <a
-                  href="https://docs.google.com/document/d/1oKL0tudjO8QIQTPwwU-XqL9Qgk79S9ug/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="icon-btn"
-                  aria-label="View thesis"
-                >
-                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                </a>
+          <li class="project">
+            <article aria-labelledby="p-trustledger">
+              <h3 id="p-trustledger">TrustLedger: Decentralized Escrow &amp; Arbitration Protocol</h3>
+              <p class="result">Co-developer · Oregon Blockchain Group</p>
+              <p class="desc">A trustless escrow protocol on Arbitrum. I designed the architecture and the arbitration mechanism (Chainlink VRF juror selection, staked juror committees, slashing, appeals) and tested the core contracts.</p>
+              <div class="foot">
+                <p class="stack">Solidity · Foundry · Hardhat · Arbitrum · Chainlink VRF</p>
+                <ul class="links">
+                  <li><a href="https://trustledger-zeta.vercel.app/" target="_blank" rel="noopener">Live</a></li>
+                  <li><a href="https://github.com/kevinle3212/TrustLedger" target="_blank" rel="noopener">Repo</a></li>
+                </ul>
               </div>
-            </div>
-            <div class="project-award" aria-label="Award">🏆 Oregon Innovation Challenge Fellow &middot; $5,000</div>
-            <h3 class="project-title">ATLAS AI</h3>
-            <p class="project-desc">
-              Co-Founder &amp; Lead Engineer. Building computer vision and ML systems for
-              real-time traffic detection and enhanced situational awareness in single-pilot
-              general aviation, targeting integration with live cockpit displays. Leading a
-              small engineering team across UO faculty, certified flight instructors, and
-              aviation industry advisors. Clark Honors College thesis.
-            </p>
-            <div class="project-tags" aria-label="Technologies">
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Machine Learning</span>
-              <span class="tag">Python</span>
-              <span class="tag">Real-Time Systems</span>
-              <span class="tag">Aviation</span>
-            </div>
-          </article>
+            </article>
+          </li>
 
-          <!-- Project: TrustLedger -->
-          <article class="project-card reveal reveal-delay-2">
-            <div class="project-top">
-              <div class="project-icon" aria-hidden="true">⛓️</div>
-              <div class="project-actions"></div>
-            </div>
-            <div class="project-award" aria-label="Type">🔗 Oregon Blockchain Group</div>
-            <h3 class="project-title">TrustLedger</h3>
-            <p class="project-desc">
-              Trustless escrow and decentralized arbitration protocol on Arbitrum, built with
-              Solidity, Foundry, and HardHat. On-chain arbitration via Chainlink VRF with staked
-              juror committees, slashing, and a 72-hour appeal mechanism. Hybrid IPFS/on-chain
-              storage with tamper-evident document hashing and linear partial-completion payouts.
-            </p>
-            <div class="project-tags" aria-label="Technologies">
-              <span class="tag">Solidity</span>
-              <span class="tag">Arbitrum</span>
-              <span class="tag">Foundry</span>
-              <span class="tag">HardHat</span>
-              <span class="tag">Chainlink VRF</span>
-              <span class="tag">IPFS</span>
-            </div>
-          </article>
-
-          <!-- Project 4 -->
-          <article class="project-card reveal reveal-delay-3">
-            <div class="project-top">
-              <div class="project-icon" aria-hidden="true">🏕️</div>
-              <div class="project-actions">
-                <a
-                  href="https://trailfeathers.github.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="icon-btn"
-                  aria-label="Visit TrailFeathers live site"
-                >
-                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                </a>
-                <a
-                  href="https://github.com/trailfeathers/trailfeathers.github.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="icon-btn"
-                  aria-label="View TrailFeathers on GitHub"
-                >
-                  <i class="fa-brands fa-github" aria-hidden="true"></i>
-                </a>
+          <li class="project">
+            <article aria-labelledby="p-mca">
+              <h3 id="p-mca">Market Confidence Analyzer</h3>
+              <p class="result">3rd of 45 teams, QuackHacks 2</p>
+              <p class="desc">A real-time 0–100 market confidence score built from 5 data sources (stocks, crypto, housing, bonds, Polymarket). Built in 24 hours on a 2-person team.</p>
+              <div class="foot">
+                <p class="stack">Python · FastAPI</p>
+                <ul class="links">
+                  <li><a href="https://github.com/kellensnider/Quackhacks2025_Market_Confidence" target="_blank" rel="noopener">Repo</a></li>
+                </ul>
               </div>
-            </div>
-            <div class="project-award" aria-label="Type">👥 4-Person Collaborative Project</div>
-            <h3 class="project-title">TrailFeathers</h3>
-            <p class="project-desc">
-              Full-stack backpacking trip planner for outdoor enthusiasts. Manage gear inventories
-              by category and weight, create collaborative trips, invite fellow hikers, and get
-              AI-generated trail summaries powered by the OpenAI API — all backed by a Flask +
-              PostgreSQL stack.
-            </p>
-            <div class="project-tags" aria-label="Technologies">
-              <span class="tag">Python</span>
-              <span class="tag">Flask</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">OpenAI API</span>
-              <span class="tag">HTML/CSS</span>
-            </div>
-          </article>
+            </article>
+          </li>
 
-        </div>
+          <li class="project">
+            <article aria-labelledby="p-trail">
+              <h3 id="p-trail">TrailFeathers</h3>
+              <p class="result">4-person team project</p>
+              <p class="desc">A full-stack backpacking trip planner.</p>
+              <div class="foot">
+                <p class="stack">Flask · PostgreSQL · OpenAI API</p>
+                <ul class="links">
+                  <li><a href="https://trailfeathers.github.io" target="_blank" rel="noopener">Live</a></li>
+                  <li><a href="https://github.com/trailfeathers/trailfeathers.github.io" target="_blank" rel="noopener">Repo</a></li>
+                </ul>
+              </div>
+            </article>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <div class="section-divider" aria-hidden="true"></div>
+    <!-- ================= Experience ================= -->
+    <section class="section" id="experience" aria-labelledby="experience-label">
+      <div class="wrap">
+        <h2 class="section-label" id="experience-label"><span class="idx" aria-hidden="true">03</span>Experience</h2>
 
-    <!-- =============================================
-         SKILLS
-         ============================================= -->
-    <section id="skills" class="section" aria-label="Skills and technologies">
-      <div class="container">
+        <ol class="timeline">
+          <li>
+            <p class="meta when">Apr 2026 – present</p>
+            <div>
+              <h3>Software Engineer <span class="org">· Oregon Blockchain Group</span></h3>
+              <p>Lead the 9-person RASC-AL team (6 engineers, research, marketing). Co-developed TrustLedger.</p>
+              <p class="meta sub">Eugene, OR</p>
+            </div>
+          </li>
+          <li>
+            <p class="meta when">May 2026 – present</p>
+            <div>
+              <h3>Freelance Web Developer <span class="org">· Sower Creative</span></h3>
+              <p>Shipped 5 production websites (2 for paying clients) as technical lead of a 3-person agency (HTML/CSS/JS, SEO schema). I own end-to-end delivery: responsive design, third-party integrations and GitHub-based deployment.</p>
+              <p class="meta sub">Eugene, OR</p>
+            </div>
+          </li>
+          <li>
+            <p class="meta when">Sep 2024 – Apr 2025</p>
+            <div>
+              <h3>CS Learning Assistant <span class="org">· University of Oregon</span></h3>
+              <p>Mentored CS 122 students weekly across two 10-week terms through debugging support and guided problem solving.</p>
+              <p class="meta sub">Eugene, OR</p>
+            </div>
+          </li>
+          <li>
+            <p class="meta when">Jun – Dec 2024</p>
+            <div>
+              <h3>Manufacturing Technician <span class="org">· Finlandia Sauna</span></h3>
+              <p>Assembled and wired electrical control panels for custom sauna units, from component layout to system-level QA.</p>
+              <p class="meta sub">Tigard, OR</p>
+            </div>
+          </li>
+        </ol>
 
-        <div class="reveal">
-          <p class="section-eyebrow">Skills</p>
-          <h2 class="section-title">Tools of the trade.</h2>
-          <p class="section-subtitle">The languages, frameworks, and tools I work with day-to-day.</p>
-        </div>
-
-        <div class="skills-grid" aria-label="Skill categories">
-
-          <div class="skill-category reveal reveal-delay-1">
-            <div class="skill-cat-header">
-              <div class="skill-cat-icon" aria-hidden="true">⚡</div>
-              <h3 class="skill-cat-title">Languages</h3>
+        <h3 class="subhead" id="education">Education</h3>
+        <ol class="timeline" aria-labelledby="education">
+          <li>
+            <p class="meta when">Expected Jun 2027</p>
+            <div>
+              <h3>B.S. Computer Science <span class="org">· University of Oregon, Clark Honors College</span></h3>
+              <p>GPA 3.95. Minors in Mathematics, Entrepreneurship and Political Science.</p>
+              <p class="sub">Coursework: Operating Systems, Computer Organization, C/C++ &amp; Unix, Data Structures, Algorithms, AI, ML Statistics.</p>
             </div>
-            <div class="skill-pills">
-              <span class="skill-pill">C</span>
-              <span class="skill-pill">C++</span>
-              <span class="skill-pill">Python</span>
-              <span class="skill-pill">Solidity</span>
-              <span class="skill-pill">TypeScript</span>
-              <span class="skill-pill">JavaScript</span>
-              <span class="skill-pill">SQL</span>
-              <span class="skill-pill">HTML / CSS</span>
+          </li>
+          <li>
+            <p class="meta when">Jul – Dec 2024</p>
+            <div>
+              <h3>Private Pilot Certificate <span class="org">· Aurora Flight Training</span></h3>
+              <p>80 hours total time in the C-172N/S/SP and DA-20. FAA First Class Medical.</p>
+              <p class="sub">Written exams: PAR 93%, IRA 95%.</p>
             </div>
-          </div>
-
-          <div class="skill-category reveal reveal-delay-2">
-            <div class="skill-cat-header">
-              <div class="skill-cat-icon" aria-hidden="true">🛠️</div>
-              <h3 class="skill-cat-title">Frameworks &amp; Tools</h3>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill">Git</span>
-              <span class="skill-pill">FastAPI</span>
-              <span class="skill-pill">Node.js</span>
-              <span class="skill-pill">Foundry</span>
-              <span class="skill-pill">HardHat</span>
-              <span class="skill-pill">Linux / Unix</span>
-              <span class="skill-pill">Vim</span>
-              <span class="skill-pill">Netlify</span>
-              <span class="skill-pill">Vercel</span>
-            </div>
-          </div>
-
-          <div class="skill-category reveal reveal-delay-3">
-            <div class="skill-cat-header">
-              <div class="skill-cat-icon" aria-hidden="true">🧠</div>
-              <h3 class="skill-cat-title">Areas</h3>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill">Data Structures &amp; Algorithms</span>
-              <span class="skill-pill">Smart Contract Development</span>
-              <span class="skill-pill">Applied Machine Learning</span>
-              <span class="skill-pill">Computer Vision</span>
-              <span class="skill-pill">Operating Systems</span>
-            </div>
-          </div>
-
-          <div class="skill-category reveal reveal-delay-4">
-            <div class="skill-cat-header">
-              <div class="skill-cat-icon" aria-hidden="true">🤖</div>
-              <h3 class="skill-cat-title">AI Tools</h3>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill">Claude Code</span>
-              <span class="skill-pill">Codex</span>
-            </div>
-          </div>
-
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <!-- =============================================
-         EXPERIENCE
-         ============================================= -->
-    <section id="experience" class="section experience-section" aria-label="Experience and education">
-      <div class="container">
-
-        <div class="reveal">
-          <p class="section-eyebrow">Experience</p>
-          <h2 class="section-title">Where I've been.</h2>
-        </div>
-
-        <div class="timeline-layout">
-
-          <!-- Work -->
+    <!-- ================= About ================= -->
+    <section class="section" id="about" aria-labelledby="about-label">
+      <div class="wrap">
+        <h2 class="section-label" id="about-label"><span class="idx" aria-hidden="true">04</span>About</h2>
+        <div class="about">
+          <picture>
+            <source type="image/webp" srcset="assets/kellen.webp">
+            <img src="assets/kellen.jpg" width="240" height="240" loading="lazy" decoding="async" alt="Kellen Snider in a navy suit and clear-framed glasses, outdoors in front of greenery and a brick building.">
+          </picture>
           <div>
-            <h3 class="timeline-col-title reveal">
-              <span class="timeline-col-title-icon" aria-hidden="true">💼</span>
-              Work
-            </h3>
-            <div class="timeline">
-
-              <div class="timeline-item reveal">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">April 2026 &ndash; Present</p>
-                <h4 class="timeline-role">Software Engineer</h4>
-                <p class="timeline-org">Oregon Blockchain Group &middot; Eugene, OR</p>
-                <p class="timeline-notes">
-                  Collaborate with a 12-person engineering team building blockchain solutions
-                  for external clients. Led development of TrustLedger, a trustless escrow
-                  and decentralized arbitration protocol.
-                </p>
-              </div>
-
-              <div class="timeline-item reveal reveal-delay-1">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">May 2026 &ndash; Present</p>
-                <h4 class="timeline-role">Freelance Web Developer</h4>
-                <p class="timeline-org">Sower Creative &middot; Eugene, OR</p>
-                <p class="timeline-notes">
-                  Technical lead of a 3-person marketing agency. Develop and deploy production
-                  websites for local SMBs — custom HTML/CSS/JS builds, SEO schema markup,
-                  mobile-responsive design, third-party integrations, and GitHub-based
-                  deployment workflows.
-                </p>
-              </div>
-
-              <div class="timeline-item reveal reveal-delay-2">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">Sept 2025 &ndash; Present</p>
-                <h4 class="timeline-role">Resident Assistant</h4>
-                <p class="timeline-org">University of Oregon Housing &middot; Justice Bean Hall</p>
-                <p class="timeline-notes">
-                  Primary on-call RA for Justice Bean Hall, a 650-resident community. Crisis
-                  response, conflict mediation, and coordination with housing staff and campus
-                  resources to manage behavioral incidents and student welfare.
-                </p>
-              </div>
-
-              <div class="timeline-item reveal reveal-delay-3">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">Sept 2024 &ndash; April 2025</p>
-                <h4 class="timeline-role">CS Learning Assistant</h4>
-                <p class="timeline-org">University of Oregon &middot; Computer Science Dept.</p>
-                <p class="timeline-notes">
-                  Mentored students in core CS concepts through debugging support and guided
-                  problem solving. Collaborated with faculty on lesson planning and course
-                  structure improvements.
-                </p>
-              </div>
-
-              <div class="timeline-item reveal reveal-delay-4">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">June &ndash; Dec 2024</p>
-                <h4 class="timeline-role">Manufacturing Technician</h4>
-                <p class="timeline-org">Finlandia Sauna &middot; Tigard, OR</p>
-                <p class="timeline-notes">
-                  Assembled and wired electrical control panels for custom sauna units,
-                  including component layout, connection routing, and system-level QA.
-                </p>
-              </div>
-
-            </div>
+            <!-- TODO: Kellen — check the near-miss sentence and the last paragraph read in your voice. -->
+            <p>I earned my private pilot certificate in 2024 and have 80 hours total time, in Cessna 172s and the DA-20. Atlas started with a near-miss, which my <a href="https://docs.google.com/document/d/1oKL0tudjO8QIQTPwwU-XqL9Qgk79S9ug/edit?usp=sharing" target="_blank" rel="noopener">thesis</a> describes in full.</p>
+            <p>I like building software that has to hold up outside a test harness: models running on a phone in a moving cockpit, contracts that hold other people's money, and websites for paying clients.</p>
           </div>
-
-          <!-- Education + Aviation -->
-          <div>
-            <h3 class="timeline-col-title reveal">
-              <span class="timeline-col-title-icon" aria-hidden="true">🎓</span>
-              Education
-            </h3>
-            <div class="timeline">
-
-              <div class="timeline-item reveal">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">2023 &ndash; June 2027</p>
-                <h4 class="timeline-role">B.S. Computer Science</h4>
-                <p class="timeline-org">University of Oregon &middot; Clark Honors College</p>
-                <p class="timeline-notes">
-                  GPA 3.97 &middot; Minors in Mathematics, Political Science, and Entrepreneurship.
-                  Thesis: ATLAS AI — computer vision and ML for single-pilot aviation safety.
-                </p>
-              </div>
-
-              <div class="timeline-item reveal reveal-delay-1">
-                <div class="timeline-dot" aria-hidden="true"></div>
-                <p class="timeline-period">July &ndash; Dec 2024</p>
-                <h4 class="timeline-role">Private Pilot Certificate</h4>
-                <p class="timeline-org">Aurora Flight Training &middot; Aurora, OR</p>
-                <p class="timeline-notes">
-                  FAA Private Pilot Certificate with First Class Medical. 74.8 TT, 38.8 PIC.
-                  Written exam scores: PAR 93%, IRA 95%. C-172N/S/SP, DA-20.
-                </p>
-              </div>
-
-            </div>
-
-            <!-- Aviation stats card -->
-            <div class="aviation-card reveal reveal-delay-2" aria-label="Aviation credentials">
-              <div class="aviation-header">
-                <span class="aviation-icon" aria-hidden="true">✈️</span>
-                <div>
-                  <h4 class="aviation-card-title">Private Pilot</h4>
-                  <p class="aviation-card-sub">FAA Certified &middot; First Class Medical</p>
-                </div>
-              </div>
-
-              <div class="aviation-stats" aria-label="Flight statistics">
-                <div class="av-stat">
-                  <div class="av-stat-num">74.8</div>
-                  <div class="av-stat-label">Total Hours</div>
-                </div>
-                <div class="av-stat">
-                  <div class="av-stat-num">38.8</div>
-                  <div class="av-stat-label">PIC Hours</div>
-                </div>
-                <div class="av-stat">
-                  <div class="av-stat-num">93%</div>
-                  <div class="av-stat-label">PAR Score</div>
-                </div>
-                <div class="av-stat">
-                  <div class="av-stat-num">95%</div>
-                  <div class="av-stat-label">IRA Score</div>
-                </div>
-              </div>
-
-              <div class="aviation-aircraft" aria-label="Aircraft flown">
-                <span class="aviation-aircraft-label">Aircraft:</span>
-                <span class="chip chip-cyan">Cessna 172N</span>
-                <span class="chip chip-cyan">Cessna 172S</span>
-                <span class="chip chip-cyan">Cessna 172SP</span>
-                <span class="chip chip-purple">Diamond DA-20</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <!-- =============================================
-         CONTACT
-         ============================================= -->
-    <section id="contact" class="section" aria-label="Contact">
-      <div class="container">
-
-        <div class="reveal">
-          <p class="section-eyebrow">Contact</p>
-          <h2 class="section-title">Let's connect.</h2>
-          <p class="section-subtitle">
-            Whether it's research collaboration, internship opportunities, or just a good
-            conversation about AI and aviation — my inbox is open.
-          </p>
-        </div>
-
-        <div class="contact-layout">
-
-          <!-- Info -->
-          <div>
-            <div class="contact-items reveal reveal-delay-1">
-
-              <a href="mailto:ksnider@uoregon.edu" class="contact-item" aria-label="Send email">
-                <div class="contact-item-icon" aria-hidden="true">
-                  <i class="fa-regular fa-envelope"></i>
-                </div>
-                <div>
-                  <div class="contact-item-label">Email</div>
-                  <div class="contact-item-value">ksnider@uoregon.edu</div>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/kellensnider"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-item"
-                aria-label="GitHub profile"
-              >
-                <div class="contact-item-icon" aria-hidden="true">
-                  <i class="fa-brands fa-github"></i>
-                </div>
-                <div>
-                  <div class="contact-item-label">GitHub</div>
-                  <div class="contact-item-value">github.com/kellensnider</div>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/kellen-snider-683396256/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-item"
-                aria-label="LinkedIn profile"
-              >
-                <div class="contact-item-icon" aria-hidden="true">
-                  <i class="fa-brands fa-linkedin-in"></i>
-                </div>
-                <div>
-                  <div class="contact-item-label">LinkedIn</div>
-                  <div class="contact-item-value">kellen-snider-683396256</div>
-                </div>
-              </a>
-
-            </div>
-
-            <div class="contact-note reveal reveal-delay-2">
-              Based in Eugene, OR. Open to conversations about ATLAS AI, blockchain and smart
-              contract work, freelance web projects, or anything at the intersection of software
-              engineering and aviation.
-            </div>
-          </div>
-
-          <!-- Form -->
-          <form
-            id="contact-form"
-            class="contact-form reveal reveal-delay-2"
-            novalidate
-            aria-label="Contact form"
-          >
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="contact-name">Name</label>
-                <input
-                  id="contact-name"
-                  class="form-input"
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                  autocomplete="name"
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="contact-email">Email</label>
-                <input
-                  id="contact-email"
-                  class="form-input"
-                  type="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  required
-                  autocomplete="email"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-subject">Subject</label>
-              <input
-                id="contact-subject"
-                class="form-input"
-                type="text"
-                name="subject"
-                placeholder="What's this about?"
-              />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-message">Message</label>
-              <textarea
-                id="contact-message"
-                class="form-textarea"
-                name="message"
-                placeholder="Tell me what's on your mind..."
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" class="btn-form">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-              &nbsp;Send Message
-            </button>
-          </form>
-
         </div>
       </div>
     </section>
 
+    <!-- ================= Skills ================= -->
+    <section class="section" id="skills" aria-labelledby="skills-label">
+      <div class="wrap">
+        <h2 class="section-label" id="skills-label"><span class="idx" aria-hidden="true">05</span>Skills</h2>
+        <dl class="skills">
+          <div><dt>Languages</dt><dd>C, C++, Python, Swift, Solidity, TypeScript/JavaScript, SQL, HTML/CSS</dd></div>
+          <div><dt>ML &amp; CV</dt><dd>PyTorch, OpenCV, Core ML, YOLOv8, object detection, dataset collection and labeling</dd></div>
+          <div><dt>Tools</dt><dd>Git, Linux/Unix, Vim, Foundry, Hardhat, FastAPI, Node.js, Netlify, Vercel</dd></div>
+          <div><dt>Aviation &amp; hardware</dt><dd>ADS-B (Stratux), in-cockpit hardware integration, flight testing, electrical control panel assembly</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ================= Contact ================= -->
+    <section class="section" id="contact" aria-labelledby="contact-label">
+      <div class="wrap">
+        <h2 class="section-label" id="contact-label"><span class="idx" aria-hidden="true">06</span>Contact</h2>
+        <p>Open to new-grad software roles in aerospace and defense.</p>
+        <ul class="contact-lines">
+          <li>
+            <span class="k">Email</span>
+            <a href="mailto:ksnider@uoregon.edu">ksnider@uoregon.edu</a>
+            <button class="copy-btn" type="button" data-copy="ksnider@uoregon.edu" hidden>Copy</button>
+            <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+          </li>
+          <li>
+            <span class="k">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/kellen-snider-683396256/" target="_blank" rel="noopener">in/kellen-snider</a>
+          </li>
+          <li>
+            <span class="k">GitHub</span>
+            <a href="https://github.com/kellensnider" target="_blank" rel="noopener">kellensnider</a>
+          </li>
+          <li>
+            <span class="k">Resume</span>
+            <a href="Kellen_Snider_Resume.pdf">Kellen_Snider_Resume.pdf</a>
+          </li>
+        </ul>
+
+        <h3 class="subhead" id="message-label">Or send a message</h3>
+        <!-- Web3Forms: the access key is a public, send-only key, so it is safe in page source. -->
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" aria-labelledby="message-label" data-web3forms>
+          <input type="hidden" name="access_key" value="04ba54a1-6952-4362-ba5a-a0f8c6a5b1b5">
+          <input type="hidden" name="subject" value="New message from kellensnider.github.io">
+          <input type="hidden" name="from_name" value="Personal website">
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input id="f-name" type="text" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" type="email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="form-foot">
+            <button class="submit-btn" type="submit">Send</button>
+            <p class="meta form-status" role="status" aria-live="polite" data-form-status></p>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <!-- =============================================
-       FOOTER
-       ============================================= -->
-  <footer class="footer" aria-label="Site footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <span class="footer-logo">Kellen Snider</span>
-        <span class="footer-copy">
-          &copy; <span id="footer-year"></span> &middot; Built with vanilla HTML, CSS &amp; JS
-        </span>
-      </div>
-
-      <nav class="footer-socials" aria-label="Social links">
-        <a
-          href="https://github.com/kellensnider"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-btn"
-          aria-label="GitHub"
-        >
-          <i class="fa-brands fa-github" aria-hidden="true"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/kellen-snider-683396256/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-btn"
-          aria-label="LinkedIn"
-        >
-          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-        </a>
-        <a href="mailto:ksnider@uoregon.edu" class="social-btn" aria-label="Email">
-          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-        </a>
-      </nav>
+  <footer class="site-foot">
+    <div class="wrap">
+      <p class="meta">© 2026 Kellen Snider</p>
+      <p class="meta">Last updated Nov 2026</p>
     </div>
   </footer>
 
-  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </body>
 </html>

@@ -1,215 +1,91 @@
-/* ============================================
-   main.js — Portfolio interactions & animations
-   ============================================ */
+// Small progressive enhancements only. The page works fully without this file.
+(function () {
+  "use strict";
 
-/* -- Page Loader -------------------------------- */
-(function initLoader() {
-  const loader = document.getElementById('page-loader');
-  if (!loader) return;
+  var root = document.documentElement;
 
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.classList.remove('loading');
-    }, 600);
-  });
+  // ---- Theme toggle -------------------------------------------------------
+  var toggle = document.querySelector("[data-theme-toggle]");
+  var darkQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 
-  // Fallback in case load event already fired
-  if (document.readyState === 'complete') {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.classList.remove('loading');
-    }, 400);
-  }
-})();
-
-/* -- Particle Canvas (Hero) --------------------- */
-(function initParticles() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let W, H, particles, animId;
-
-  const CONFIG = {
-    count:        55,
-    speed:        0.28,
-    connectDist:  140,
-    dotRadius:    1.5,
-    colorDot:     'rgba(124, 111, 205, 0.55)',
-    colorLine:    'rgba(124, 111, 205, ',
-  };
-
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
+  function currentTheme() {
+    var set = root.getAttribute("data-theme");
+    if (set === "light" || set === "dark") return set;
+    return darkQuery && darkQuery.matches ? "dark" : "light";
   }
 
-  function randomParticle() {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = CONFIG.speed * (0.4 + Math.random() * 0.8);
-    return {
-      x:  Math.random() * W,
-      y:  Math.random() * H,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-    };
+  function renderToggle() {
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    toggle.textContent = next === "dark" ? "Dark" : "Light";
+    toggle.setAttribute("aria-label", "Switch to " + next + " theme");
   }
 
-  function init() {
-    resize();
-    particles = Array.from({ length: CONFIG.count }, randomParticle);
-  }
-
-  function step() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Move
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      p.x = Math.max(0, Math.min(W, p.x));
-      p.y = Math.max(0, Math.min(H, p.y));
-    }
-
-    // Draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < CONFIG.connectDist) {
-          const alpha = (1 - d / CONFIG.connectDist) * 0.35;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = CONFIG.colorLine + alpha + ')';
-          ctx.lineWidth   = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw dots
-    for (const p of particles) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, CONFIG.dotRadius, 0, Math.PI * 2);
-      ctx.fillStyle = CONFIG.colorDot;
-      ctx.fill();
-    }
-
-    animId = requestAnimationFrame(step);
-  }
-
-  // Pause when tab hidden (performance)
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(animId);
-    else animId = requestAnimationFrame(step);
-  });
-
-  const ro = new ResizeObserver(() => { resize(); });
-  ro.observe(canvas);
-
-  init();
-  animId = requestAnimationFrame(step);
-})();
-
-/* -- Sticky Nav --------------------------------- */
-(function initNav() {
-  const nav      = document.getElementById('main-nav');
-  const toggle   = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
-
-  if (!nav) return;
-
-  // Scroll → add .scrolled
-  const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Mobile menu
-  if (toggle && navLinks) {
-    toggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      toggle.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+  if (toggle) {
+    toggle.hidden = false;
+    renderToggle();
+    toggle.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      renderToggle();
     });
+    if (darkQuery && darkQuery.addEventListener) {
+      darkQuery.addEventListener("change", renderToggle);
+    }
+  }
 
-    // Close on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+  // ---- Copy email ---------------------------------------------------------
+  if (navigator.clipboard && window.isSecureContext) {
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      var status = btn.parentElement.querySelector("[data-copy-status]");
+      var timer;
+      btn.hidden = false;
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(btn.getAttribute("data-copy")).then(
+          function () { report("Copied", "Email address copied"); },
+          function () { report("Copy failed", "Could not copy the email address"); }
+        );
       });
+      function report(label, message) {
+        btn.textContent = label;
+        if (status) status.textContent = message;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          btn.textContent = "Copy";
+          if (status) status.textContent = "";
+        }, 2000);
+      }
     });
   }
 
-  // Active link on scroll
-  const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav-link[href^="#"]');
-
-  const ioNav = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        links.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
-        });
-      }
+  // ---- Contact form: submit inline instead of leaving the page -------------
+  // Without JS the form posts normally and Web3Forms shows its own confirmation.
+  var form = document.querySelector("form[data-web3forms]");
+  if (form && window.fetch && window.FormData) {
+    var formStatus = form.querySelector("[data-form-status]");
+    var submit = form.querySelector("button[type=submit]");
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      submit.disabled = true;
+      formStatus.textContent = "Sending…";
+      fetch(form.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && data.success) {
+            form.reset();
+            formStatus.textContent = "Sent. Thanks for reaching out.";
+          } else {
+            formStatus.textContent = "That didn't go through. Please email me directly.";
+          }
+        })
+        .catch(function () {
+          formStatus.textContent = "That didn't go through. Please email me directly.";
+        })
+        .then(function () { submit.disabled = false; });
     });
-  }, { threshold: 0.45 });
-
-  sections.forEach(s => ioNav.observe(s));
+  }
 })();
-
-/* -- Scroll Reveal ------------------------------- */
-(function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  els.forEach(el => io.observe(el));
-})();
-
-/* -- Contact Form (mailto fallback) -------------- */
-(function initForm() {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name    = form.querySelector('[name="name"]')?.value.trim()    || '';
-    const email   = form.querySelector('[name="email"]')?.value.trim()   || '';
-    const subject = form.querySelector('[name="subject"]')?.value.trim() || 'Portfolio Contact';
-    const message = form.querySelector('[name="message"]')?.value.trim() || '';
-
-    const body    = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    const mailto  = `mailto:ksnider@uoregon.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-  });
-})();
-
-/* -- Smooth scroll for anchor buttons ----------- */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
