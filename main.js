@@ -13,13 +13,9 @@
     if (set === "light" || set === "dark") return set;
     return darkQuery && darkQuery.matches ? "dark" : "light";
   }
-
   function renderToggle() {
-    var next = currentTheme() === "dark" ? "light" : "dark";
-    toggle.textContent = next === "dark" ? "Dark" : "Light";
-    toggle.setAttribute("aria-label", "Switch to " + next + " theme");
+    toggle.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode";
   }
-
   if (toggle) {
     toggle.hidden = false;
     renderToggle();
@@ -29,15 +25,46 @@
       try { localStorage.setItem("theme", next); } catch (e) {}
       renderToggle();
     });
-    if (darkQuery && darkQuery.addEventListener) {
-      darkQuery.addEventListener("change", renderToggle);
-    }
+    if (darkQuery && darkQuery.addEventListener) darkQuery.addEventListener("change", renderToggle);
+  }
+
+  // ---- Sign array: location sign for where you are, arrows toward the rest --
+  // Like a real airport sign array: the section you're in shows as a black
+  // location sign; every other sign points up or down toward its section.
+  var signs = Array.prototype.slice.call(document.querySelectorAll(".signbar [data-section]"));
+  var sections = signs.map(function (a) { return document.getElementById(a.getAttribute("data-section")); });
+  if (signs.length && sections.every(Boolean)) {
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var line = window.innerHeight * 0.3;
+      var current = -1;
+      sections.forEach(function (el, i) {
+        if (el.getBoundingClientRect().top <= line) current = i;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections.length - 1;
+      }
+      signs.forEach(function (a, i) {
+        var here = i === current;
+        a.classList.toggle("here", here);
+        a.setAttribute("data-dir", i < current ? "up" : "down");
+        if (here) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
+    };
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
   }
 
   // ---- Copy email ---------------------------------------------------------
   if (navigator.clipboard && window.isSecureContext) {
     document.querySelectorAll("[data-copy]").forEach(function (btn) {
       var status = btn.parentElement.querySelector("[data-copy-status]");
+      var idle = btn.textContent;
       var timer;
       btn.hidden = false;
       btn.addEventListener("click", function () {
@@ -51,7 +78,7 @@
         if (status) status.textContent = message;
         clearTimeout(timer);
         timer = setTimeout(function () {
-          btn.textContent = "Copy";
+          btn.textContent = idle;
           if (status) status.textContent = "";
         }, 2000);
       }
